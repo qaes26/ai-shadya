@@ -1,161 +1,92 @@
 /* ========================================
-   WhatsApp-Style CSS - Purple Theme 💜
-   Faithful WhatsApp Dark Mode Recreation
+   WhatsApp Mobile-Only Design - Purple 💜
    ======================================== */
 
-/* ========================================
-   Design Tokens
-   ======================================== */
 :root {
-    /* WhatsApp Dark Colors - with Purple accent */
-    --wa-bg-app: #111b21;
-    --wa-bg-header: #1f2c34;
-    --wa-bg-chat: #0b141a;
-    --wa-bg-input-area: #1f2c34;
-    --wa-bg-input-box: #2a3942;
-    --wa-bg-bubble-sent: #5b21b6;
-    --wa-bg-bubble-received: #1f2c34;
-    --wa-bg-date-badge: #182229;
-    --wa-bg-hover: rgba(124, 58, 237, 0.08);
-    
-    --wa-text-primary: #e9edef;
-    --wa-text-secondary: #8696a0;
-    --wa-text-bubble-sent: #ffffff;
-    --wa-text-bubble-received: #e9edef;
-    --wa-text-time-sent: rgba(255, 255, 255, 0.6);
-    --wa-text-time-received: #8696a0;
-    --wa-text-input: #d1d7db;
-    --wa-text-placeholder: #8696a0;
-    
-    --wa-accent: #7c3aed;
-    --wa-accent-light: #a78bfa;
-    --wa-accent-dark: #5b21b6;
-    --wa-online: #25d366;
-    --wa-blue-tick: #53bdeb;
-    
-    --wa-border: #2a3942;
-    --wa-divider: rgba(134, 150, 160, 0.15);
-    
-    --wa-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    
-    --wa-header-h: 60px;
-    --wa-footer-h: 62px;
-    --wa-radius-bubble: 8px;
-    
-    --font: 'Tajawal', 'Segoe UI', Helvetica, Arial, sans-serif;
+    --bg: #0b141a;
+    --hdr: #1f2c34;
+    --input-bg: #2a3942;
+    --sent: #5b21b6;
+    --rcvd: #1f2c34;
+    --txt: #e9edef;
+    --txt2: #8696a0;
+    --accent: #7c3aed;
+    --accent-l: #a78bfa;
+    --tick: #53bdeb;
+    --border: #2a3942;
+    --font: 'Tajawal', sans-serif;
 }
 
-/* ========================================
-   Reset & Base
-   ======================================== */
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 html, body {
     height: 100%;
     overflow: hidden;
-}
-
-body {
     font-family: var(--font);
-    background: var(--wa-bg-app);
-    color: var(--wa-text-primary);
+    background: var(--bg);
+    color: var(--txt);
     direction: rtl;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 14.5px;
-    line-height: 1.4;
+    font-size: 15px;
+    /* Mobile only - prevent desktop stretch */
+    max-width: 100vw;
 }
 
 /* ========================================
-   WhatsApp Chat Wallpaper
-   ======================================== */
-.wa-wallpaper {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    background-color: #06121b;
-    /* WhatsApp doodle-style pattern overlay */
-    background-image: 
-        url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='p' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='20' cy='20' r='1' fill='%23ffffff' opacity='0.02'/%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23p)' width='200' height='200'/%3E%3C/svg%3E");
-    opacity: 0.9;
-}
-
-/* ========================================
-   App Container
+   App Shell
    ======================================== */
 .wa-app {
-    position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     height: 100vh;
     height: 100dvh;
-    max-width: 600px;
+    width: 100%;
+    max-width: 480px;
     margin: 0 auto;
-}
-
-@media (min-width: 601px) {
-    .wa-app {
-        border-left: 1px solid var(--wa-border);
-        border-right: 1px solid var(--wa-border);
-    }
+    position: relative;
 }
 
 /* ========================================
-   Header (WhatsApp Style)
+   Header
    ======================================== */
 .wa-header {
     display: flex;
     align-items: center;
-    height: var(--wa-header-h);
-    background: var(--wa-bg-header);
-    padding: 0 6px 0 10px;
-    gap: 0;
+    height: 56px;
+    background: var(--hdr);
+    padding: 0 4px 0 6px;
     flex-shrink: 0;
     z-index: 10;
-    border-bottom: 1px solid var(--wa-divider);
 }
 
-.wa-header-btn {
+.wa-hdr-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     border: none;
     background: transparent;
-    color: var(--wa-text-secondary);
+    color: var(--txt2);
     cursor: pointer;
-    transition: background 0.15s;
-    flex-shrink: 0;
 }
 
-.wa-header-btn:hover {
-    background: var(--wa-bg-hover);
-}
+.wa-hdr-btn svg { width: 22px; height: 22px; }
 
-.wa-back-btn {
-    width: 32px;
-    margin-left: -4px;
-}
+.wa-back { width: 28px; }
+.wa-back svg { width: 20px; height: 20px; transform: rotate(180deg); }
 
-.wa-back-btn svg {
-    transform: rotate(180deg);
-}
-
-/* Avatar */
+/* Avatar - Real Photo */
 .wa-avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
-    margin-left: 10px;
+    margin-left: 8px;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 8px rgba(124, 58, 237, 0.3);
 }
 
 .wa-avatar img {
@@ -164,42 +95,30 @@ body {
     object-fit: cover;
 }
 
-/* Contact Info */
-.wa-contact-info {
-    flex: 1;
-    min-width: 0;
-    cursor: pointer;
-}
+.wa-info { flex: 1; min-width: 0; }
 
-.wa-contact-name {
+.wa-name {
+    display: block;
     font-size: 16px;
     font-weight: 500;
-    color: var(--wa-text-primary);
+    color: var(--txt);
+    line-height: 1.3;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.3;
 }
 
-.wa-contact-status {
-    font-size: 12.5px;
-    color: var(--wa-text-secondary);
+.wa-status {
+    display: block;
+    font-size: 12px;
     line-height: 1.2;
+    color: var(--txt2);
 }
 
-.wa-contact-status.online {
-    color: var(--wa-accent-light);
-}
+.wa-status.online { color: var(--accent-l); }
+.wa-status.typing { color: var(--accent-l); }
 
-.wa-contact-status.typing {
-    color: var(--wa-accent-light);
-}
-
-.wa-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 0;
-}
+.wa-hdr-actions { display: flex; gap: 2px; }
 
 /* ========================================
    Chat Area
@@ -208,425 +127,330 @@ body {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 6px 48px 8px;
+    padding: 6px 14px 10px;
     display: flex;
     flex-direction: column;
-    scroll-behavior: smooth;
-    /* WhatsApp-style scrollbar */
-    scrollbar-width: thin;
-    scrollbar-color: rgba(134, 150, 160, 0.3) transparent;
+    position: relative;
+    scrollbar-width: none;
 }
 
-.wa-chat::-webkit-scrollbar {
-    width: 6px;
-}
-.wa-chat::-webkit-scrollbar-track {
-    background: transparent;
-}
-.wa-chat::-webkit-scrollbar-thumb {
-    background: rgba(134, 150, 160, 0.3);
-    border-radius: 3px;
-}
+.wa-chat::-webkit-scrollbar { display: none; }
 
-@media (max-width: 500px) {
-    .wa-chat {
-        padding: 6px 12px 8px;
-    }
+/* ===== Background Watermark Photo ===== */
+.wa-bg-photo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background-image: url('qais-photo.png');
+    background-size: cover;
+    background-position: center top;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+    filter: grayscale(30%);
 }
 
 /* ========================================
-   Date Badge
+   Date Pill
    ======================================== */
-.wa-date-badge {
+.wa-date-pill {
     display: flex;
     justify-content: center;
     margin: 8px 0;
+    position: relative;
+    z-index: 1;
 }
 
-.wa-date-badge span {
-    background: var(--wa-bg-date-badge);
-    color: var(--wa-text-secondary);
-    font-size: 12px;
-    padding: 5px 12px;
-    border-radius: 8px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
-    user-select: none;
+.wa-date-pill span {
+    background: #182229;
+    color: var(--txt2);
+    font-size: 11.5px;
+    padding: 4px 12px;
+    border-radius: 7px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15);
 }
 
 /* ========================================
    Encryption Notice
    ======================================== */
-.wa-encryption-notice {
+.wa-encrypt {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    background: rgba(25, 40, 50, 0.6);
-    border-radius: 8px;
-    padding: 8px 14px;
-    margin: 4px auto 12px;
-    max-width: 380px;
+    gap: 5px;
+    background: rgba(25,40,50,0.5);
+    border-radius: 7px;
+    padding: 7px 12px;
+    margin: 2px auto 10px;
+    max-width: 330px;
+    position: relative;
+    z-index: 1;
 }
 
-.wa-encryption-notice svg {
+.wa-encrypt svg {
+    width: 12px; height: 12px;
     flex-shrink: 0;
     fill: #f8d24e;
-    width: 13px;
-    height: 13px;
 }
 
-.wa-encryption-notice span {
-    font-size: 11.5px;
-    color: rgba(233, 237, 239, 0.55);
+.wa-encrypt span {
+    font-size: 11px;
+    color: rgba(233,237,239,0.5);
     text-align: center;
     line-height: 1.5;
 }
 
 /* ========================================
-   Message Rows
+   Message Rows & Bubbles
    ======================================== */
-.wa-message-row {
+.wa-row {
     display: flex;
-    margin-bottom: 2px;
-    animation: wa-msgIn 0.2s ease-out;
-}
-
-.wa-message-row.sent {
-    justify-content: flex-end;
-}
-
-.wa-message-row.received {
-    justify-content: flex-start;
-}
-
-/* First message in a group gets more margin */
-.wa-message-row.first-in-group {
-    margin-top: 8px;
-}
-
-@keyframes wa-msgIn {
-    from {
-        opacity: 0;
-        transform: translateY(6px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ========================================
-   Message Bubbles
-   ======================================== */
-.wa-bubble {
+    margin-bottom: 1.5px;
     position: relative;
-    max-width: 75%;
-    padding: 6px 8px 20px 8px;
-    border-radius: var(--wa-radius-bubble);
+    z-index: 1;
+    animation: msgIn 0.2s ease-out;
+}
+
+.wa-row.out { justify-content: flex-end; }
+.wa-row.in { justify-content: flex-start; }
+.wa-row.gap { margin-top: 8px; }
+
+@keyframes msgIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.wa-bbl {
+    position: relative;
+    max-width: 82%;
+    padding: 5px 7px 18px;
+    border-radius: 7px;
     font-size: 14.5px;
-    line-height: 1.55;
+    line-height: 1.5;
     word-wrap: break-word;
-    overflow-wrap: break-word;
-    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+    box-shadow: 0 1px 0.5px rgba(0,0,0,0.13);
 }
 
-@media (max-width: 500px) {
-    .wa-bubble {
-        max-width: 85%;
-    }
-}
-
-/* Sent bubble */
-.wa-bubble-sent {
-    background: var(--wa-bg-bubble-sent);
-    color: var(--wa-text-bubble-sent);
-    border-top-left-radius: var(--wa-radius-bubble);
-    border-top-right-radius: 0;
-    margin-left: 0;
-}
-
-.wa-message-row.sent.first-in-group .wa-bubble-sent {
+/* Sent */
+.wa-bbl.out {
+    background: var(--sent);
+    color: #fff;
+    border-top-left-radius: 7px;
     border-top-right-radius: 0;
 }
 
-/* Received bubble */
-.wa-bubble-received {
-    background: var(--wa-bg-bubble-received);
-    color: var(--wa-text-bubble-received);
-    border-top-right-radius: var(--wa-radius-bubble);
-    border-top-left-radius: 0;
-    margin-right: 0;
-}
-
-.wa-message-row.received.first-in-group .wa-bubble-received {
+/* Received */
+.wa-bbl.in {
+    background: var(--rcvd);
+    color: var(--txt);
+    border-top-right-radius: 7px;
     border-top-left-radius: 0;
 }
 
-/* Bubble Tails */
-.wa-bubble-tail-sent,
-.wa-bubble-tail-received {
+/* Tails */
+.wa-tail {
     position: absolute;
     top: 0;
     width: 8px;
     height: 13px;
 }
 
-.wa-bubble-tail-sent {
-    right: -8px;
+.wa-tail.out {
+    right: -7px;
 }
-
-.wa-bubble-tail-sent::before {
+.wa-tail.out::before {
     content: '';
     position: absolute;
     top: 0;
-    right: 0;
-    width: 0;
-    height: 0;
+    width: 0; height: 0;
     border-style: solid;
     border-width: 0 8px 10px 0;
-    border-color: transparent transparent transparent var(--wa-bg-bubble-sent);
-    /* RTL: tail on right */
+    border-color: transparent transparent transparent var(--sent);
     transform: scaleX(-1);
 }
 
-.wa-bubble-tail-received {
-    left: -8px;
+.wa-tail.in {
+    left: -7px;
 }
-
-.wa-bubble-tail-received::before {
+.wa-tail.in::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
+    width: 0; height: 0;
     border-style: solid;
     border-width: 0 0 10px 8px;
-    border-color: transparent transparent transparent var(--wa-bg-bubble-received);
+    border-color: transparent transparent transparent var(--rcvd);
 }
 
-/* Message Text */
-.wa-msg-text {
+/* Message text */
+.wa-txt {
     unicode-bidi: plaintext;
     white-space: pre-wrap;
 }
 
-/* Message Meta (time + ticks) */
-.wa-msg-meta {
+/* Meta */
+.wa-meta {
     position: absolute;
-    bottom: 4px;
-    left: 8px;
+    bottom: 3px;
+    left: 7px;
     display: flex;
     align-items: center;
     gap: 3px;
     direction: ltr;
 }
 
-.wa-msg-time {
-    font-size: 11px;
-    line-height: 1;
+.wa-time {
+    font-size: 10.5px;
     white-space: nowrap;
 }
 
-.wa-bubble-sent .wa-msg-time {
-    color: var(--wa-text-time-sent);
-}
+.wa-bbl.out .wa-time { color: rgba(255,255,255,0.55); }
+.wa-bbl.in .wa-time { color: var(--txt2); }
 
-.wa-bubble-received .wa-msg-time {
-    color: var(--wa-text-time-received);
-}
-
-/* Read Receipts (Double Ticks) */
-.wa-ticks {
-    display: inline-flex;
-    align-items: center;
-}
-
+/* Double Ticks */
 .wa-ticks svg {
-    width: 18px;
-    height: 13px;
+    width: 16px;
+    height: 11px;
 }
-
-.wa-ticks.read svg path {
-    fill: var(--wa-blue-tick);
-}
-
-.wa-ticks.delivered svg path {
-    fill: var(--wa-text-time-sent);
-}
+.wa-ticks.read svg path { fill: var(--tick); }
+.wa-ticks.sent svg path { fill: rgba(255,255,255,0.55); }
 
 /* ========================================
-   Typing Indicator
+   Typing Dots
    ======================================== */
-.wa-typing-dots {
+.wa-dots {
     display: flex;
-    align-items: center;
     gap: 4px;
-    padding: 4px 6px;
+    padding: 5px 8px;
 }
 
-.wa-typing-dots span {
+.wa-dots span {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: var(--wa-text-secondary);
-    animation: wa-typing 1.3s ease-in-out infinite;
+    background: var(--txt2);
+    animation: dotJump 1.3s ease-in-out infinite;
 }
+.wa-dots span:nth-child(2) { animation-delay: .15s; }
+.wa-dots span:nth-child(3) { animation-delay: .3s; }
 
-.wa-typing-dots span:nth-child(2) { animation-delay: 0.15s; }
-.wa-typing-dots span:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes wa-typing {
-    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+@keyframes dotJump {
+    0%,60%,100% { transform: translateY(0); opacity: .4; }
     30% { transform: translateY(-5px); opacity: 1; }
 }
 
 /* ========================================
-   Footer / Input Area
+   Footer / Input
    ======================================== */
 .wa-footer {
-    background: var(--wa-bg-input-area);
-    padding: 5px 8px;
+    background: var(--hdr);
+    padding: 5px 6px;
     flex-shrink: 0;
     z-index: 10;
 }
 
-.wa-input-row {
+.wa-input-wrap {
     display: flex;
     align-items: flex-end;
-    gap: 6px;
+    gap: 5px;
 }
 
 .wa-input-box {
     flex: 1;
     display: flex;
     align-items: flex-end;
-    background: var(--wa-bg-input-box);
-    border-radius: 24px;
-    padding: 4px 4px 4px 10px;
-    min-height: 48px;
+    background: var(--input-bg);
+    border-radius: 22px;
+    padding: 3px 3px 3px 8px;
+    min-height: 44px;
 }
 
-.wa-input-btn {
+.wa-ibtn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 40px;
+    width: 34px;
+    height: 38px;
     border: none;
     background: transparent;
-    color: var(--wa-text-secondary);
+    color: var(--txt2);
     cursor: pointer;
     flex-shrink: 0;
-    border-radius: 50%;
-    transition: color 0.15s;
 }
 
-.wa-input-btn:hover {
-    color: var(--wa-text-primary);
-}
+.wa-ibtn svg { width: 23px; height: 23px; }
 
-.wa-text-input {
+.wa-tinput {
     flex: 1;
     border: none;
     outline: none;
     background: transparent;
-    color: var(--wa-text-input);
+    color: var(--txt);
     font-family: var(--font);
     font-size: 15px;
-    line-height: 1.45;
+    line-height: 1.4;
     resize: none;
-    min-height: 40px;
-    max-height: 120px;
-    padding: 9px 4px;
+    min-height: 38px;
+    max-height: 100px;
+    padding: 8px 4px;
     direction: rtl;
 }
 
-.wa-text-input::placeholder {
-    color: var(--wa-text-placeholder);
-}
+.wa-tinput::placeholder { color: var(--txt2); }
 
-/* Send Button */
-.wa-send-btn {
+.wa-send {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: none;
-    background: var(--wa-accent);
-    color: #ffffff;
+    background: var(--accent);
+    color: #fff;
     cursor: pointer;
     flex-shrink: 0;
-    transition: background 0.15s, transform 0.1s;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s;
 }
 
-.wa-send-btn:hover {
-    background: var(--wa-accent-dark);
-}
+.wa-send:active { transform: scale(0.92); }
+.wa-send svg { width: 21px; height: 21px; transform: rotate(180deg); margin-right: 2px; }
 
-.wa-send-btn:active {
-    transform: scale(0.93);
-}
-
-.wa-send-btn svg {
-    transform: rotate(180deg);
-    margin-right: 2px;
-}
-
-/* ========================================
-   Emoji Picker
-   ======================================== */
-.wa-emoji-picker {
+/* Emoji Picker */
+.wa-emojis {
     display: none;
-    background: var(--wa-bg-input-box);
+    background: var(--input-bg);
     border-radius: 12px;
-    padding: 10px;
-    margin-top: 6px;
-    animation: wa-emojiIn 0.15s ease-out;
+    padding: 8px;
+    margin-top: 5px;
 }
 
-.wa-emoji-picker.active {
-    display: block;
-}
+.wa-emojis.active { display: block; }
 
-@keyframes wa-emojiIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.wa-emoji-grid {
+.wa-egrid {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 2px;
 }
 
-.wa-emoji {
+.wa-egrid span {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
-    padding: 6px;
+    font-size: 1.5rem;
+    padding: 8px;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.1s;
-    user-select: none;
 }
 
-.wa-emoji:hover {
-    background: rgba(255, 255, 255, 0.08);
-}
-
-@media (max-width: 400px) {
-    .wa-emoji-grid {
-        grid-template-columns: repeat(6, 1fr);
-    }
-}
+.wa-egrid span:active { background: rgba(255,255,255,0.08); }
 
 /* ========================================
-   Splash Screen
+   Splash
    ======================================== */
 .wa-splash {
     position: fixed;
@@ -635,9 +459,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     background: #111b21;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: opacity 0.5s, visibility 0.5s;
 }
 
 .wa-splash.hidden {
@@ -646,66 +469,69 @@ body {
     pointer-events: none;
 }
 
-.wa-splash-content {
-    text-align: center;
+.wa-splash-inner { text-align: center; }
+
+.wa-splash-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 18px;
+    border: 3px solid var(--accent);
+    box-shadow: 0 0 25px rgba(124,58,237,0.35);
+    animation: splashPulse 2s ease-in-out infinite;
 }
 
-.wa-splash-icon {
-    margin-bottom: 20px;
-    animation: wa-splashPulse 2s ease-in-out infinite;
+.wa-splash-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-@keyframes wa-splashPulse {
-    0%, 100% { transform: scale(1); opacity: 0.9; }
-    50% { transform: scale(1.06); opacity: 1; }
+@keyframes splashPulse {
+    0%,100% { box-shadow: 0 0 15px rgba(124,58,237,0.25); }
+    50% { box-shadow: 0 0 35px rgba(124,58,237,0.5); }
 }
 
-.wa-splash-title {
-    font-size: 1.6rem;
+.wa-splash-inner h2 {
+    font-size: 1.5rem;
     font-weight: 700;
-    color: var(--wa-text-primary);
-    margin-bottom: 6px;
+    color: var(--txt);
+    margin-bottom: 4px;
 }
 
-.wa-splash-sub {
-    font-size: 0.85rem;
-    color: var(--wa-text-secondary);
-    margin-bottom: 28px;
+.wa-splash-inner p {
+    font-size: 0.82rem;
+    color: var(--txt2);
+    margin-bottom: 24px;
 }
 
-.wa-splash-bar {
-    width: 180px;
+.wa-sbar {
+    width: 160px;
     height: 3px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255,255,255,0.06);
     border-radius: 4px;
     margin: 0 auto;
     overflow: hidden;
 }
 
-.wa-splash-progress {
+.wa-sprogress {
     height: 100%;
     width: 0;
-    background: var(--wa-accent);
+    background: var(--accent);
     border-radius: 4px;
-    animation: wa-loadBar 1.8s ease-in-out forwards;
+    animation: loadBar 1.8s ease-in-out forwards;
 }
 
-@keyframes wa-loadBar {
-    0% { width: 0; }
-    100% { width: 100%; }
+@keyframes loadBar {
+    to { width: 100%; }
 }
 
 /* ========================================
-   Selection & Accessibility
+   Accessibility
    ======================================== */
-::selection {
-    background: var(--wa-accent);
-    color: white;
-}
+::selection { background: var(--accent); color: #fff; }
 
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-    }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
